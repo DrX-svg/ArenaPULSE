@@ -2,25 +2,7 @@ import express from "express";
 
 const app = express();
 const port = 3000;
-const liveMatch = {
-    id: "match-001",
-    status: "live",
-    map: "Ancient",
-    startedAt: new Date().toISOString(),
-    bestOf: 3,
-    currentRoundState: "LIVE",
-    round: 8,
-    teamA: {
-        name: "Titan",
-        shortName: "TTN",
-        score: 4,
-    },
-    teamB: {
-        name: "Vortex",
-        shortName: "VTX",
-        score: 3,
-    },
-};
+import { liveMatch } from "./data/liveMatch.js";
 
 app.get("/", (request, response) => {
     response.send("ArenaPULSE server is running");
