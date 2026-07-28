@@ -1,0 +1,1 @@
+console.log("ArenaPulse development server");

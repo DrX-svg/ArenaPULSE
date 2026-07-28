@@ -1,0 +1,19 @@
+{
+  "name": "arenapulse",
+  "version": "1.0.0",
+  "description": "Real-Time eSports match dashboard and event processing service",
+  "keywords": [
+    "esports",
+    "dashboard",
+    "nodejs",
+    "websocket",
+    "realtime"
+  ],
+  "license": "MIT",
+  "author": "DrX-svg",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
