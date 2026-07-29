@@ -26,7 +26,14 @@ app.get("/api/matches/live", (request, response) => {
   const liveMatch = matches.find((match) => {
     return match.status === "live";
   });
-  response.json(liveMatch);
+  if (liveMatch !== undefined) {
+    response.json(liveMatch);
+    return;
+  }
+  response.status(404).json({
+    error: "LIVE_MATCH_NOT_FOUND",
+    message: "There is no live match at this time"
+  });
 });
 
 app.get("/api/matches/:matchId", (request, response) => {
