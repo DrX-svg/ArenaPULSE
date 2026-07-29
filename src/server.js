@@ -1,5 +1,6 @@
 import express from "express";
 import { matches } from "./data/matches.js";
+import { getUpcomingGridSeries } from "./services/gridClient.js";
 
 const app = express();
 const port = 3000;
@@ -36,6 +37,21 @@ app.get("/api/matches/live", (request, response) => {
   });
 });
 
+app.get("/api/grid/series/upcoming", async (request, response) => {
+    try {
+        const gridSeries = await getUpcomingGridSeries();
+
+        response.json(gridSeries);
+    } catch (error) {
+        console.error("GRID API request failed:", error.message);
+
+        response.status(502).json({
+            error: "GRID_API_ERROR",
+            message: "Could not retrieve series from GRID"
+        });
+    }
+});
+
 app.get("/api/matches/:matchId", (request, response) => {
   const requestedMatchId = request.params.matchId;
 
@@ -51,6 +67,21 @@ app.get("/api/matches/:matchId", (request, response) => {
     error: "MATCH_NOT_FOUND",
     message: `No match was found with ID ${requestedMatchId}`,
   });
+});
+
+app.get("/api/external/cs2/running", async (request, response) => {
+    try {
+        const matches = await getRunningCs2Matches();
+
+        response.json(matches);
+    } catch(error) {
+        console.error(error);
+
+        response.status(502).json({
+            error: "EXTERNAL_API_ERROR",
+            message: "Could not retrieve matches from API"
+        });
+    }
 });
 
 app.listen(port, () => {
