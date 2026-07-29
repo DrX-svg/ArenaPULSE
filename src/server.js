@@ -1,38 +1,51 @@
 import express from "express";
+import { matches } from "./data/matches.js";
 
 const app = express();
 const port = 3000;
-import { liveMatch } from "./data/liveMatch.js";
 
 app.get("/", (request, response) => {
-    response.send("ArenaPULSE server is running");
+  response.send("ArenaPULSE server is running");
 });
+
 app.get("/api/health", (request, response) => {
-    response.json({
-        status: "ok",
-        service: "ArenaPULSE",
-        version: "1.0.0",
-        timestamp: new Date().toISOString(),
-        uptimeSeconds: Math.floor(process.uptime()),
-    });
+  response.json({
+    status: "ok",
+    service: "ArenaPULSE",
+    version: "1.0.0",
+    timestamp: new Date().toISOString(),
+    uptimeSeconds: Math.floor(process.uptime()),
+  });
 });
+
+app.get("/api/matches", (request, response) => {
+  response.json(matches);
+});
+
 app.get("/api/matches/live", (request, response) => {
-    response.json(liveMatch);
+  const liveMatch = matches.find((match) => {
+    return match.status === "live";
+  });
+  response.json(liveMatch);
 });
+
 app.get("/api/matches/:matchId", (request, response) => {
-    const requestedMatchId = request.params.matchId;
+  const requestedMatchId = request.params.matchId;
 
-    if (requestedMatchId === liveMatch.id) {
-        response.json(liveMatch);
-        return;
-    }
+  const requestedMatch = matches.find((match) => {
+    return match.id === requestedMatchId;
+  });
+  if (requestedMatch !== undefined) {
+    response.json(requestedMatch);
+    return;
+  }
 
-    response.status(404).json({
-        error: "MATCH_NOT_FOUND",
-        message: `No match was found with ID ${requestedMatchId}`,
-    });
+  response.status(404).json({
+    error: "MATCH_NOT_FOUND",
+    message: `No match was found with ID ${requestedMatchId}`,
+  });
 });
 
 app.listen(port, () => {
-    console.log(`ArenaPULSE server listening on port ${port}`);
+  console.log(`ArenaPULSE server listening on port ${port}`);
 });
