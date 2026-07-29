@@ -1,6 +1,7 @@
 import express from "express";
 import { matches } from "./data/matches.js";
 import { getUpcomingGridSeries } from "./services/gridClient.js";
+import { normalizeGridSeries } from "./adapters/gridSeriesAdapter.js";
 
 const app = express();
 const port = 3000;
@@ -39,9 +40,25 @@ app.get("/api/matches/live", (request, response) => {
 
 app.get("/api/grid/series/upcoming", async (request, response) => {
     try {
-        const gridSeries = await getUpcomingGridSeries();
+        const gridConnection = await getUpcomingGridSeries();
+        const gameFilter = request.query.game?.toLowerCase();
 
-        response.json(gridSeries);
+        let series = normalizeGridSeries(gridConnection);
+
+        series = series.filter((item) => {
+            return item.isTest === false;
+        });
+
+        if (gameFilter !== undefined) {
+            series = series.filter((item) => {
+                return item.game === gameFilter;
+            });
+        }
+
+        response.json({
+            count: series.length,
+            series
+        });
     } catch (error) {
         console.error("GRID API request failed:", error.message);
 

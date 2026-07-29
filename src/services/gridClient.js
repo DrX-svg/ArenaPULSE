@@ -47,6 +47,7 @@ export async function getUpcomingGridSeries() {
     const query = `
         query AllSeries {
             allSeries(
+                first: 50
                 filter: {
                     startTimeScheduled: {
                         gte: "${startTime.toISOString()}"
