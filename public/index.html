@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+            />
+
+            <title>ArenaPULSE - eSports Match Dashboard</title>
+
+            <link rel="stylesheet" href="/css/styles.css" />
+    </head>
+
+    <body>
+        <header class="site-header">
+            <div>
+                <p class="eyebrow">REAL eSPORTS DATA</p>
+                <h1>ArenaPULSE</h1>
+                <p class="subtitle">
+                    Upcoming Counter-Strike 2 series powered by GRID
+                </p>
+            </div>
+
+            <button id="refresh-button" type="button">
+                Refresh matches
+            </button>
+        </header>
+
+        <main>
+            <section class="dashboard-summary">
+                <div>
+                    <span class="summary-label">Game</span>
+                    <strong>Counter-Strike 2</strong>
+                </div>
+
+                <div>
+                    <span class="summary-label">Available series</span>
+                    <strong id="match-count">-</strong>
+                </div>
+
+                <div>
+                    <span class="summary-label">Last updated</span>
+                    <strong id="last-updated">-</strong>
+                </div>
+            </section>
+
+            <p id="status-message" class="status-message">
+                Loading real matches...
+            </p>
+
+            <section
+                id="matches-container"
+                class="matches-grid"
+                aria-live="polite">
+            </section>
+        </main>
+
+        <footer>
+            Match data provided by GRID Open Access.
+        </footer>
+
+        <script type="module" src="/js/dashboard.js"></script>
+    </body>
+</html>

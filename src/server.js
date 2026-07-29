@@ -6,9 +6,11 @@ import { normalizeGridSeries } from "./adapters/gridSeriesAdapter.js";
 const app = express();
 const port = 3000;
 
-app.get("/", (request, response) => {
-  response.send("ArenaPULSE server is running");
-});
+app.use(express.static("public"));
+
+// app.get("/", (request, response) => {
+//   response.send("ArenaPULSE server is running");
+// });
 
 app.get("/api/health", (request, response) => {
   response.json({
