@@ -1,4 +1,5 @@
-export const matches = [ // mock-up matches
+// mock match data used by local API endpoints
+export const matches = [
   {
     id: "match-001",
     status: "live",
