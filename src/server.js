@@ -4,7 +4,7 @@ import { getUpcomingGridSeries } from "./services/gridClient.js";
 import { normalizeGridSeries } from "./adapters/gridSeriesAdapter.js";
 
 const app = express();
-const port = 3000;
+const port = Number(process.env.PORT) || 3000;
 
 app.use(express.static("public"));
 
