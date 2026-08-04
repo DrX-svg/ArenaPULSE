@@ -97,7 +97,7 @@ The browser never communicates directly with GRID and never receives the GRID AP
 - Environment-based configuration
 
 ## Project Structure
-
+```text
 ArenaPulse/
 ├── public/
 │   ├── css/
@@ -118,7 +118,7 @@ ArenaPulse/
 ├── package.json
 ├── package-lock.json
 └── README.md
-
+```
 ## Data flow
 
 1. The browser requests the ArenaPulse GRID endpoint.
