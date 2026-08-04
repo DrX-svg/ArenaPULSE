@@ -1,8 +1,7 @@
 const GRID_CENTRAL_DATA_URL =
     "https://api-op.grid.gg/central-data/graphql";
 
-async function sendGridQuery(url, query) {
-    const apiKey = process.env.GRID_API_KEY;
+async function sendGridQuery(url, query, apiKey) {
 
     if(!apiKey) {
         throw new Error("GRID_API_KEY is not configured");
@@ -38,7 +37,7 @@ async function sendGridQuery(url, query) {
     return responseBody.data;
 }
 
-export async function getUpcomingGridSeries() {
+export async function getUpcomingGridSeries(apiKey) {
     const startTime = new Date();
     const endTime = new Date(
         startTime.getTime() + 24 * 60 * 60 * 1000
@@ -88,7 +87,8 @@ export async function getUpcomingGridSeries() {
   
     const data = await sendGridQuery(
         GRID_CENTRAL_DATA_URL,
-        query
+        query,
+        apiKey
     );
 
     return data.allSeries;

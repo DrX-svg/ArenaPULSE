@@ -42,7 +42,9 @@ app.get("/api/matches/live", (request, response) => {
 
 app.get("/api/grid/series/upcoming", async (request, response) => {
     try {
-        const gridConnection = await getUpcomingGridSeries();
+        const gridConnection = await getUpcomingGridSeries(
+          process.env.GRID_API_KEY
+        );
         const gameFilter = request.query.game?.toLowerCase();
 
         let series = normalizeGridSeries(gridConnection);
