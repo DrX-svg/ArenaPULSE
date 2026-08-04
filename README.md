@@ -8,7 +8,6 @@ The project demonstrates a complete data flow from an external GraphQL API, thro
 
 ## Live Demo
 
-Deployment in progress.
 [Open the live dashboard](https://arena-pulse.pages.dev)
 
 ## Preview 
