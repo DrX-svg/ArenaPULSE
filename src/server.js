@@ -88,20 +88,6 @@ app.get("/api/matches/:matchId", (request, response) => {
   });
 });
 
-app.get("/api/external/cs2/running", async (request, response) => {
-    try {
-        const matches = await getRunningCs2Matches();
-
-        response.json(matches);
-    } catch(error) {
-        console.error(error);
-
-        response.status(502).json({
-            error: "EXTERNAL_API_ERROR",
-            message: "Could not retrieve matches from API"
-        });
-    }
-});
 
 app.listen(port, () => {
   console.log(`ArenaPULSE server listening on port ${port}`);
