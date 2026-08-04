@@ -250,4 +250,7 @@ licensing terms.
 
 ## License
 
-This project is intended to be released under the MIT License.
+This project is licensed under the GNU Affero General Public License v3.0. 
+See [LICENSE](LICENSE) for details.
+
+Third-party match data, team logos and trademarks are not covered by this license and remain subject to their respective owners' terms.
